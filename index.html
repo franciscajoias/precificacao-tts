@@ -146,7 +146,14 @@
   const fmtMoney = v => isFinite(v) ? v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'}) : '—';
   const fmtPct = v => isFinite(v) ? (v*100).toLocaleString('pt-BR',{maximumFractionDigits:1,minimumFractionDigits:1})+'%' : '—';
 
+  // Custos fixos por faixa de preço, conforme cada aba da planilha original
+  const FIXED_COSTS = {
+    '1': { tiktokRate: 0.10, freteRate: 0.06, custoVenda: 4 }, // < R$50
+    '2': { tiktokRate: 0.06, freteRate: 0.06, custoVenda: 6 }  // > R$50
+  };
+
   function buildPanel(scn, defaults){
+    const fx = FIXED_COSTS[scn];
     const el = document.getElementById('tab-t' + scn);
     el.innerHTML = `
       <div class="grid2">
@@ -171,16 +178,16 @@
           <div class="card-title fixed-text">Custos fixos da plataforma</div>
           <div class="card-desc">Calculados automaticamente — não editáveis</div>
           <div class="fixed-row">
-            <span class="fl">Comissão TikTok <span class="rate">6%</span></span>
+            <span class="fl">Comissão TikTok <span class="rate">${(fx.tiktokRate*100).toLocaleString('pt-BR')}%</span></span>
             <span class="fv" id="fx-tiktok-${scn}">—</span>
           </div>
           <div class="fixed-row">
-            <span class="fl">Custo de frete <span class="rate">6%</span></span>
+            <span class="fl">Custo de frete <span class="rate">${(fx.freteRate*100).toLocaleString('pt-BR')}%</span></span>
             <span class="fv" id="fx-frete-${scn}">—</span>
           </div>
           <div class="fixed-row">
             <span class="fl">Custo por venda <span class="rate">fixo</span></span>
-            <span class="fv">R$ 4,00</span>
+            <span class="fv">${fmtMoney(fx.custoVenda)}</span>
           </div>
         </div>
       </div>
@@ -195,18 +202,19 @@
         <div class="result-row" style="padding-top:0;"><span class="rl">Margem líquida</span><span class="rv" id="rs-liquidoPct-${scn}">—</span></div>
       </div>
     `;
-    document.querySelectorAll(`#tab-${scn} input`).forEach(i => i.addEventListener('input', render));
+    document.querySelectorAll(`#tab-t${scn} input`).forEach(i => i.addEventListener('input', render));
   }
 
   function calc(scn){
     const $ = id => document.getElementById(id);
+    const fx = FIXED_COSTS[scn];
     const preco = parseFloat($(`preco-${scn}`).value) || 0;
     const comissaoPct = (parseFloat($(`comissao-${scn}`).value) || 0) / 100;
     const custoProduto = parseFloat($(`custo-${scn}`).value) || 0;
 
-    const tiktok = preco * 0.06;
-    const frete = preco * 0.06;
-    const custoVenda = 4;
+    const tiktok = preco * fx.tiktokRate;
+    const frete = preco * fx.freteRate;
+    const custoVenda = fx.custoVenda;
     const comissaoAfiliado = preco * comissaoPct;
 
     const totalDescontos = tiktok + frete + custoVenda + comissaoAfiliado;
