@@ -5,30 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Precificação TikTok Shop</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#F3F5F1;
-    --surface:#FFFFFF;
-    --surface-2:#EBEFE8;
-    --ink:#16231D;
-    --muted:#5C6D64;
-    --line:#DAE0D6;
-    --accent:#1F6F5C;
-    --accent-soft:#E3F1EC;
-    --fixed:#5A6B78;
-    --fixed-soft:#E9EDF0;
-    --negative:#A23B3B;
-    --negative-soft:#F6E7E5;
+    --bg:#0F0F0F;
+    --surface:#1A1A1A;
+    --surface-2:#151515;
+    --ink:#FFFFFF;
+    --muted:#8A8A8E;
+    --line:#2B2B2E;
+    --accent:#25F4EE;
+    --accent-soft:rgba(37,244,238,0.12);
+    --fixed:#FE2C55;
+    --fixed-soft:rgba(254,44,85,0.10);
+    --negative:#FE2C55;
+    --negative-soft:rgba(254,44,85,0.10);
   }
   *{box-sizing:border-box;}
-  body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans', sans-serif;-webkit-font-smoothing:antialiased;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter', sans-serif;-webkit-font-smoothing:antialiased;}
   .wrap{max-width:920px;margin:0 auto;padding:28px 20px 80px;}
 
   header.app-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:22px;border-bottom:1px solid var(--line);padding-bottom:20px;}
   .brand{display:flex;align-items:center;gap:10px;}
-  .brand-mark{width:34px;height:34px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;flex-shrink:0;}
-  h1{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:600;margin:0;letter-spacing:-0.01em;}
+  .brand-mark{width:34px;height:34px;border-radius:8px;background:#000;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;}
+  .brand-mark svg{width:18px;height:18px;position:relative;z-index:2;}
+  h1{font-family:'Poppins',sans-serif;font-size:22px;font-weight:600;margin:0;letter-spacing:-0.01em;}
   .brand-sub{color:var(--muted);font-size:13px;margin-top:2px;}
   .headline-note{color:var(--muted);font-size:13.5px;max-width:260px;text-align:right;line-height:1.45;}
 
@@ -41,7 +42,7 @@
   .kpi-sub{font-size:11.5px;color:var(--muted);margin-top:4px;}
 
   .tabs{display:flex;gap:4px;margin-bottom:22px;border-bottom:1px solid var(--line);}
-  .tab-btn{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;background:none;border:none;padding:10px 4px;margin-right:22px;color:var(--muted);cursor:pointer;position:relative;top:1px;}
+  .tab-btn{font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;background:none;border:none;padding:10px 4px;margin-right:22px;color:var(--muted);cursor:pointer;position:relative;top:1px;}
   .tab-btn.active{color:var(--ink);border-bottom:2px solid var(--accent);}
   .tab-panel{display:none;}
   .tab-panel.active{display:block;}
@@ -51,7 +52,7 @@
 
   .card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;border-left:3px solid var(--accent);}
   .card.fixed{border-left-color:var(--fixed);}
-  .card-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;margin:0 0 4px;}
+  .card-title{font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;margin:0 0 4px;}
   .card-title.accent-text{color:var(--accent);}
   .card-title.fixed-text{color:var(--fixed);}
   .card-desc{font-size:12px;color:var(--muted);margin-bottom:16px;}
@@ -75,7 +76,7 @@
   .result-row .rv{font-family:'IBM Plex Mono',monospace;font-weight:600;}
   .result-row.total{border-top:1px dashed var(--line);margin-top:4px;padding-top:11px;}
   .result-row.hero{padding-top:14px;margin-top:6px;border-top:1px solid var(--line);}
-  .result-row.hero .rl{font-family:'Space Grotesk',sans-serif;font-weight:600;color:var(--ink);font-size:14.5px;}
+  .result-row.hero .rl{font-family:'Poppins',sans-serif;font-weight:600;color:var(--ink);font-size:14.5px;}
   .result-row.hero .rv{font-size:19px;}
   .result-row.hero .rv.accent{color:var(--accent);}
   .result-row.hero .rv.neg{color:var(--negative);}
@@ -89,7 +90,20 @@
 
   <header class="app-head">
     <div class="brand">
-      <div class="brand-mark">P</div>
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" style="position:absolute;transform:translate(-1.5px,-1.5px);">
+          <path d="M3 9L13 3L21 11L11 21L3 13V9Z" fill="#25F4EE"/>
+          <circle cx="16.5" cy="7.5" r="1.6" fill="#0F0F0F"/>
+        </svg>
+        <svg viewBox="0 0 24 24" fill="none" style="position:absolute;transform:translate(1.5px,1.5px);">
+          <path d="M3 9L13 3L21 11L11 21L3 13V9Z" fill="#FE2C55"/>
+          <circle cx="16.5" cy="7.5" r="1.6" fill="#0F0F0F"/>
+        </svg>
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M3 9L13 3L21 11L11 21L3 13V9Z" fill="#FFFFFF"/>
+          <circle cx="16.5" cy="7.5" r="1.6" fill="#0F0F0F"/>
+        </svg>
+      </div>
       <div>
         <h1>Precificação TikTok Shop</h1>
         <div class="brand-sub">Calculadora de lucro por faixa de preço</div>
@@ -125,7 +139,7 @@
   <!-- TAB 2: > R$50 -->
   <div class="tab-panel" id="tab-t2" data-scenario="2"></div>
 
-  <footer>Comissão TikTok, frete e custo por venda são fixos, replicando exatamente a sua planilha. Só o preço, a comissão de afiliado e o custo do produto são editáveis.</footer>
+
 </div>
 
 <script>
